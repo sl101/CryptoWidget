@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,7 +14,8 @@ public class MyFrame extends JFrame {
 
 	public MyFrame() {
 		super("Crypto course");
-		this.setBounds(900,50,250,80);
+		this.setBounds(620,740,350,65);
+//		this.setBackground(Color.green);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -22,8 +24,8 @@ public class MyFrame extends JFrame {
 		ArrayList<String> pairsArray;
 		try {
 			pairsArray = marketPairs.getMarketPairs();
-//			System.out.println(pairsArray);
 			JPanel panel = new JPanel();
+//			panel.setBackground(Color.RED);
 			for (int i = 0; i < pairsArray.size(); i++) {
 				String value = pairsArray.get(i);
 				panel.add(new JLabel(value));
@@ -37,9 +39,15 @@ public class MyFrame extends JFrame {
 
 	public void pairsInfoView(CryptoPair pair) {
 		JPanel panel = new JPanel();
-		panel.add(new JLabel(pair.getName()));
-		panel.add(new JLabel("  "+pair.getBuyPrice()));
-		panel.add(new JLabel(" /  "+pair.getSellPrice()));
+//		panel.setBackground(Color.RED);
+		JLabel label = new JLabel(pair.getName()+"  "+pair.getBuyPrice()+" /  "+pair.getSellPrice());
+//		label.setBackground(Color.YELLOW);
+		panel.add(label);
+//		panel.add(new JLabel("  "+pair.getBuyPrice()));
+//		panel.add(new JLabel(" /  "+pair.getSellPrice()));
+//		this.setTitle(pair.getName()+"  "+pair.getBuyPrice()+" /  "+pair.getSellPrice());
+//		this.setBackground(Color.YELLOW);
+		
 		this.getContentPane().add(panel);
 	}
 

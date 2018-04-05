@@ -20,10 +20,17 @@ public class CryptoInfo {
 	
 	
 	
-	public CryptoPair getPairInfo(String pair) throws IOException{
+	public CryptoPair getPairInfo(String pair){
 		CryptoPair cryptoPair = new CryptoPair();
 		cryptoPair.setName(pair);
-		Document doc = Jsoup.connect(url).get();
+		Document doc = null;
+		try {
+			doc = Jsoup.connect(url).get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("No connect");
+		}
 		Elements elements = doc.body().getElementsByAttributeValue("pair", pair);
 		
 		for(Element element : elements){
