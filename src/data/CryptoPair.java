@@ -1,10 +1,13 @@
 package data;
 
+import java.util.List;
+
 public class CryptoPair {
 	
 	private String name;
 	private double sellPrice;
 	private double buyPrice;
+//	private List<CryptoPair> pairs;
 	
 	public String getName() {
 		return name;
@@ -24,6 +27,12 @@ public class CryptoPair {
 	public void setBuyPrice(double buyPrice) {
 		this.buyPrice = buyPrice;
 	}
+//	public List<CryptoPair> getPairs() {
+//		return pairs;
+//	}
+//	public void setPairs(List<CryptoPair> pairs) {
+//		this.pairs = pairs;
+//	}
 	
 
 	

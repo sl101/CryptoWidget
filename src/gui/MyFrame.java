@@ -2,44 +2,38 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.*;
 
 import data.CryptoPair;
-import marketConstant.ExmoPairs;
-import marketConstant.MarketPairs;
+import marketConstant.MarketExmo;
+import marketConstant.Market;
 
 public class MyFrame extends JFrame {
 
 	public MyFrame() {
 		super("Crypto course");
-		this.setBounds(900,50,250,80);
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(900, 200, 270, 500);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public void setPairsOption() {
-		MarketPairs marketPairs = new ExmoPairs();
-		ArrayList<String> pairsArray;
-		try {
-			pairsArray = marketPairs.getMarketPairs();
-//			System.out.println(pairsArray);
-			JPanel panel = new JPanel();
-			for (int i = 0; i < pairsArray.size(); i++) {
-				String value = pairsArray.get(i);
-				panel.add(new JLabel(value));
-				this.getContentPane().add(panel);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	public void pairsInfoView(CryptoPair pair) {
+	public void pairsInfoView(Map<Market, List<CryptoPair>> marketsInfo) {
 		JPanel panel = new JPanel();
-		panel.add(new JLabel(pair.getName()));
-		panel.add(new JLabel("  "+pair.getBuyPrice()));
-		panel.add(new JLabel(" /  "+pair.getSellPrice()));
+
+		for (Map.Entry market : marketsInfo.entrySet()) {
+//			System.out.println("read marketsInfo:\n");
+			List<CryptoPair> pairs = new ArrayList<>();
+			pairs = (List<CryptoPair>) market.getValue();
+			for (CryptoPair pair : pairs) {
+				System.out.println(pair.getName() + "  " + pair.getBuyPrice() + " /  " + pair.getSellPrice());
+				panel.add(new JLabel(pair.getName() + "  " + pair.getBuyPrice() + " /  " + pair.getSellPrice()));
+//				panel.setAutoscrolls(true);
+			}
+		}
+
 		this.getContentPane().add(panel);
 	}
 
