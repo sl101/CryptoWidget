@@ -3,51 +3,38 @@ package gui;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.*;
 
 import data.CryptoPair;
-import marketConstant.ExmoPairs;
-import marketConstant.MarketPairs;
+import marketConstant.MarketExmo;
+import marketConstant.Market;
 
 public class MyFrame extends JFrame {
 
 	public MyFrame() {
 		super("Crypto course");
-		this.setBounds(620,740,350,65);
-//		this.setBackground(Color.green);
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(900, 200, 270, 500);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public void setPairsOption() {
-		MarketPairs marketPairs = new ExmoPairs();
-		ArrayList<String> pairsArray;
-		try {
-			pairsArray = marketPairs.getMarketPairs();
-			JPanel panel = new JPanel();
-//			panel.setBackground(Color.RED);
-			for (int i = 0; i < pairsArray.size(); i++) {
-				String value = pairsArray.get(i);
-				panel.add(new JLabel(value));
-				this.getContentPane().add(panel);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	public void pairsInfoView(CryptoPair pair) {
+	public void pairsInfoView(Map<Market, List<CryptoPair>> marketsInfo) {
 		JPanel panel = new JPanel();
-//		panel.setBackground(Color.RED);
-		JLabel label = new JLabel(pair.getName()+"  "+pair.getBuyPrice()+" /  "+pair.getSellPrice());
-//		label.setBackground(Color.YELLOW);
-		panel.add(label);
-//		panel.add(new JLabel("  "+pair.getBuyPrice()));
-//		panel.add(new JLabel(" /  "+pair.getSellPrice()));
-//		this.setTitle(pair.getName()+"  "+pair.getBuyPrice()+" /  "+pair.getSellPrice());
-//		this.setBackground(Color.YELLOW);
-		
+
+		for (Map.Entry market : marketsInfo.entrySet()) {
+			List<CryptoPair> pairs = new ArrayList<>();
+			pairs = (List<CryptoPair>) market.getValue();
+//			for (CryptoPair pair : pairs) {
+//				System.out.println(pair.getName() + "  " + pair.getBuyPrice() + " /  " + pair.getSellPrice());
+//				panel.add(new JLabel(pair.getName() + "  " + pair.getBuyPrice() + " /  " + pair.getSellPrice()));
+//
+//			}
+		}
+
+
 		this.getContentPane().add(panel);
 	}
 
